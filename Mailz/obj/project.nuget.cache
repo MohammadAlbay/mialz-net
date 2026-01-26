@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "dgSpecHash": "Vv9b/KhQbJY=",
+  "success": true,
+  "projectFilePath": "/Users/apple/Desktop/Developer/Tool/mialz-net/Mailz/Mailz.csproj",
+  "expectedPackageFiles": [
+    "/Users/apple/.nuget/packages/microsoft.dotnet.ilcompiler/10.0.2/microsoft.dotnet.ilcompiler.10.0.2.nupkg.sha512",
+    "/Users/apple/.nuget/packages/microsoft.net.illink.tasks/10.0.2/microsoft.net.illink.tasks.10.0.2.nupkg.sha512",
+    "/Users/apple/.nuget/packages/runtime.osx-x64.microsoft.dotnet.ilcompiler/10.0.2/runtime.osx-x64.microsoft.dotnet.ilcompiler.10.0.2.nupkg.sha512"
+  ],
+  "logs": []
+}
