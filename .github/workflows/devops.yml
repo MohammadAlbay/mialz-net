@@ -7,39 +7,13 @@ jobs:
     deploy:
         runs-on: ubuntu-latest
         steps:
-            - name: Checkout Repository
-              uses: actions/checkout@v3
-            - name: Set up .Net
-              uses: actions/setup-dotnet@v3
+            - name: Execute Remote Deployment Script
+              uses: appleboy/ssh-action@v1.0.3
               with:
-                  dotnet-version: '10.0.x'
-            - name: Restore Dependencies
-              run: dotnet restore
-            - name: Build Application
-              run: dotnet build --no-restore --configuration Release
-            - name: Run Tests
-              run: dotnet test --no-build --configuration Release --verbosity normal
-            - name: Publish Application
-              run: dotnet publish --no-build --configuration Release --output ./publish
-            - name: Deploy to Production Server
-              uses: appleboy/ssh-action@v0.1.6
-              with:
-                  host: ${{ secrets.SERVER_IP }}
-                  username: ${{ secrets.SERVER_USER }}
-                  key: ${{ secrets.SSH_PRIVATE_KEY }}
-                  port: ${{ secrets.SERVER_SSH_PORT }}
-                  source: "./publish/"
-                  target: "/opt/mailz-net"
-
-            - name: Restart Application Service
-              uses: appleboy/ssh-action@v0.1.6
-              with:
-                  host: ${{ secrets.SERVER_IP }}
-                  username: ${{ secrets.SERVER_USER }}
-                  key: ${{ secrets.SSH_PRIVATE_KEY }}
-                  port: ${{ secrets.SERVER_SSH_PORT }}
-                  script: |
-                      sudo systemctl restart mailz-net.service
-            - name: Notify Deployment Success
-              run: echo "Deployment to production server completed successfully."
-              
+                    host: ${{ secrets.SERVER_IP }}
+                    port: ${{ secrets.SERVER_SSH_PORT }}
+                    username: ${{ secrets.SERVER_USER }}
+                    key: ${{ secrets.SSH_PRIVATE_KEY }}
+                    script: |
+                        cd /opt/mailz-net
+                        git pull origin main
