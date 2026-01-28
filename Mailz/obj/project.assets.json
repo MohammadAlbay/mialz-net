@@ -81,11 +81,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/apple/Desktop/Developer/Tool/mialz-net/Mailz/Mailz.csproj",
+      "projectUniqueName": "/Users/apple/Desktop/Developer/Tool/mailz-net/Mailz/Mailz.csproj",
       "projectName": "Mailz",
-      "projectPath": "/Users/apple/Desktop/Developer/Tool/mialz-net/Mailz/Mailz.csproj",
+      "projectPath": "/Users/apple/Desktop/Developer/Tool/mailz-net/Mailz/Mailz.csproj",
       "packagesPath": "/Users/apple/.nuget/packages/",
-      "outputPath": "/Users/apple/Desktop/Developer/Tool/mialz-net/Mailz/obj/",
+      "outputPath": "/Users/apple/Desktop/Developer/Tool/mailz-net/Mailz/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/Users/apple/.nuget/NuGet/NuGet.Config"

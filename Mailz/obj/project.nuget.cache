@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "38xUxFcqPyY=",
+  "dgSpecHash": "T2NbR+iGAuk=",
   "success": true,
-  "projectFilePath": "/Users/apple/Desktop/Developer/Tool/mialz-net/Mailz/Mailz.csproj",
+  "projectFilePath": "/Users/apple/Desktop/Developer/Tool/mailz-net/Mailz/Mailz.csproj",
   "expectedPackageFiles": [
     "/Users/apple/.nuget/packages/microsoft.net.illink.tasks/10.0.2/microsoft.net.illink.tasks.10.0.2.nupkg.sha512",
     "/Users/apple/.nuget/packages/microsoft.netcore.app.runtime.linux-x64/10.0.2/microsoft.netcore.app.runtime.linux-x64.10.0.2.nupkg.sha512",
