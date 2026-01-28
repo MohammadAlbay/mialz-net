@@ -17,3 +17,4 @@ jobs:
                     script: |
                         cd /opt/mailz-net/mialz-net
                         git pull origin main
+                        ./opt/mailz-net/mialz-net/Mailz/bin/Debug/net10.0/Mailz
