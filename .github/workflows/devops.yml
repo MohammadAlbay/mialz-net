@@ -15,5 +15,5 @@ jobs:
                     username: ${{ secrets.SERVER_USER }}
                     key: ${{ secrets.SSH_PRIVATE_KEY }}
                     script: |
-                        cd /opt/mailz-net
+                        cd /opt/mailz-net/mialz-net
                         git pull origin main
