@@ -21,9 +21,13 @@ jobs:
                         # 2 Fetch the latest code
                         git pull origin main
 
+                        # 3 Clean the project
+                        cd Mailz
+                        dotnet clean
+                        cd ..
                         # 3 Build the project
                         dotnet build
-                        
+
                         # 4 Restart the service
                         # ./opt/mailz-net/Mailz/bin/Debug/net10.0/linux-x64/Mailz
                         sudo systemctl restart mailz.service
