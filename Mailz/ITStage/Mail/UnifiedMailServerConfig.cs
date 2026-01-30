@@ -8,7 +8,7 @@ namespace ITStage.Mail
     [JsonSerializable(typeof(UnifiedMailServerConfig))]
     public partial class ConfigJsonContext : JsonSerializerContext { }
 
-    public struct UnifiedMailServerConfig
+    public class UnifiedMailServerConfig
     {
         [JsonPropertyName("Port.IMAP")]
         public int ImapPort { get; set; } = 993;
@@ -52,7 +52,7 @@ namespace ITStage.Mail
             return JsonSerializer.Deserialize(
                 configText,
                 ConfigJsonContext.Default.UnifiedMailServerConfig
-            );
+            ) ?? new UnifiedMailServerConfig();
         }
 
         public static async Task<UnifiedMailServerConfig> LoadConfigAsync(string jsonFile)
@@ -61,7 +61,7 @@ namespace ITStage.Mail
             return JsonSerializer.Deserialize(
                 configText,
                 ConfigJsonContext.Default.UnifiedMailServerConfig
-            );
+            ) ?? new UnifiedMailServerConfig();
         }
 
     }
