@@ -11,66 +11,38 @@ namespace ITStage.Mail
     public struct UnifiedMailServerConfig
     {
         [JsonPropertyName("Port.IMAP")]
-        public int ImapPort { get; set; }
+        public int ImapPort { get; set; } = 993;
 
         [JsonPropertyName("Port.SMTP.Sub")]
-        public int SMTPSubmisstionPort { get; set; }
+        public int SMTPSubmisstionPort { get; set; } = 587;
 
         [JsonPropertyName("Port.SMTP.In")]
-        public int SMTPInPort { get; set; }
+        public int SMTPInPort { get; set; } = 25;
 
         [JsonPropertyName("TLS_Path")]
-        public string SSLCertificatePath { get; set; }
+        public string SSLCertificatePath { get; set; } = "";
 
         [JsonPropertyName("TLS_Key")]
-        public string SSLCertificateKey { get; set; }
+        public string SSLCertificateKey { get; set; } = "";
 
         [JsonPropertyName("DKIM_Path")]
-        public string DKIMPrivateKeyPath { get; set; }
+        public string DKIMPrivateKeyPath { get; set; } = "";
 
 
         [JsonPropertyName("Storage_Path")]
-        public string StoragePath { get; set; }
+        public string StoragePath { get; set; } = "";
 
         [JsonPropertyName("Log_FilePath")]
-        public string LogPath { get; set; }
+        public string LogPath { get; set; } = "";
 
         [JsonPropertyName("Queue_Path")]
-        public string QueuePath { get; set; }
+        public string QueuePath { get; set; } = "";
 
         [JsonPropertyName("Users_JsonPath")]
-        public string UsersJSONPath { get; set; }
+        public string UsersJSONPath { get; set; } = "";
 
         [JsonPropertyName("BlockedDomains_FilePath")]
-        public string BlockedDomainsJSONPath { get; set; }
-
-
-        [JsonConstructor]
-        public UnifiedMailServerConfig(
-            int imapPort,
-            int smtpSubPort,
-            int smtpInPort,
-            string sslCertificatePath,
-            string sslCertificateKey,
-            string dkimPrivateKeyPath,
-            string storagePath,
-            string logPath,
-            string queuePath,
-            string usersJSONPath,
-            string blockedDomainsJSONPath)
-        {
-            ImapPort = imapPort;
-            SMTPInPort = smtpInPort;
-            SMTPSubmisstionPort = smtpSubPort;
-            SSLCertificatePath = sslCertificatePath;
-            SSLCertificateKey = sslCertificateKey;
-            DKIMPrivateKeyPath = dkimPrivateKeyPath;
-            StoragePath = storagePath;
-            LogPath = logPath;
-            QueuePath = queuePath;
-            UsersJSONPath = usersJSONPath;
-            BlockedDomainsJSONPath = blockedDomainsJSONPath;
-        }
+        public string BlockedDomainsJSONPath { get; set; } = "";
 
 
 
