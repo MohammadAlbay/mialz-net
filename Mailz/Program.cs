@@ -4,7 +4,7 @@ using ITStage.Mail;
 using ITStage.Mail.IMAP;
 
 Console.WriteLine("Starting Mailz Unified Mail Server...");
-var config = UnifiedMailServerConfig.LoadConfig("/opt/mailz-net/config/ums.json");
+var config = UnifiedMailServerConfig.LoadConfig("/etc/mailz/config/ums.json");
 
 _ = Task.Run(async () =>
 {
