@@ -15,11 +15,16 @@ jobs:
                     username: ${{ secrets.SERVER_USER }}
                     key: ${{ secrets.SSH_PRIVATE_KEY }}
                     script: |
+                        # 0 Error handling: Exit immediately if a command exits with a non-zero status
+                        set -e
                         # 1 Move to the app dir
                         cd /opt/mailz-net/
 
                         # 2. Disacrd any local changes
                         git reset --hard
+
+                        # 2.1. Remove untracked files and directories
+                        git clean -fdx
                         
                         # 2.5. Fetch the latest code
                         git pull origin main
