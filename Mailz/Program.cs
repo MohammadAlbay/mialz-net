@@ -6,13 +6,15 @@ using ITStage.Mail.IMAP;
 Console.WriteLine("Starting Mailz Unified Mail Server...");
 var config = UnifiedMailServerConfig.LoadConfig("/etc/mailz/config/ums.json");
 
-
+IMAPServer imapServer = new IMAPServer(config);
 Task.WaitAll([
     Task.Run(async () =>
-{
-    IMAPServer imapServer = new IMAPServer(config);
-    await imapServer.Initialize();
-    await imapServer.Connect();
-})
+    {
+        await imapServer.Initialize();
+    }),
+
+    Task.Run(async () => {
+        await imapServer.Connect();
+    })
 ]);
 Console.WriteLine("Hello, World! Build Success!");
