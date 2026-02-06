@@ -34,7 +34,7 @@ namespace ITStage.Mail.IMAP
                 await foreach (TcpClient client in ConnectionQueue.Reader.ReadAllAsync())
                 {
                     // Handle client connection
-                    Logger.Log($"Handling new client: {client.Client.RemoteEndPoint}");
+                    await Logger.LogAsync($"Handling new client: {client.Client.RemoteEndPoint}");
                     await HandleClient(client);
                 }
             }
@@ -42,7 +42,7 @@ namespace ITStage.Mail.IMAP
 
         public async Task HandleClient(TcpClient client)
         {
-            Logger.Log($"Started handling client: {client.Client.RemoteEndPoint}");
+            await Logger.LogAsync($"Started handling client: {client.Client.RemoteEndPoint}");
             using (client)
             using (NetworkStream stream = client.GetStream())
             {
@@ -55,7 +55,7 @@ namespace ITStage.Mail.IMAP
                 }
                 catch (Exception ex)
                 {
-                    Logger.Log($"Error handling client {client.Client.RemoteEndPoint}: {ex.Message}");
+                    await Logger.LogAsync($"Error handling client {client.Client.RemoteEndPoint}: {ex.Message}");
                 }
 
 
@@ -65,19 +65,19 @@ namespace ITStage.Mail.IMAP
 
         public async Task ParseCommands(string command, TcpClient? client)
         {
-            Logger.Log($"Parsing command: {command}");
+            await Logger.LogAsync($"Parsing command: {command}");
         }
 
         public async Task Connect()
         {
             listener = new TcpListener(System.Net.IPAddress.Any, Port);
             listener.Start();
-            Logger.Log($"IMAP Server started on port {Port}. Waiting for connections...");
+            await Logger.LogAsync($"IMAP Server started on port {Port}. Waiting for connections...");
             while (true)
             {
                 TcpClient client = await listener.AcceptTcpClientAsync();
                 await ConnectionQueue.Writer.WriteAsync(client);
-                Logger.Log($"Accepted new client: {client.Client.RemoteEndPoint}");
+                await Logger.LogAsync($"Accepted new client: {client.Client.RemoteEndPoint}");
             }
         }
 
