@@ -9,7 +9,7 @@ namespace ITStage.Mail.IMAP
         const int MAX_CAPACITY = 10;
 
         public DualOutputLog Logger { get; set; }
-        public int Port { get; set; }
+        public int Port { get; set; } = 993;
         public bool UseSSL { get; set; }
         private Channel<TcpClient> ConnectionQueue { get; set; }
         private UnifiedMailServerConfig Config { get; set; }
@@ -18,6 +18,7 @@ namespace ITStage.Mail.IMAP
         public IMAPServer(UnifiedMailServerConfig config)
         {
             Config = config;
+            Port = config.ImapPort;
             ConnectionQueue = Channel.CreateBounded<TcpClient>(MAX_CAPACITY);
             Logger = new DualOutputLog("IMAP", config.LogPath, Console.Out);
         }
