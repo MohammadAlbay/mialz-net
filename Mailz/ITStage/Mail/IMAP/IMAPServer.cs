@@ -50,8 +50,20 @@ namespace ITStage.Mail.IMAP
                 {
                     using StreamReader reader = new(stream);
 
-                    string command = await reader.ReadLineAsync() ?? "";
-                    await ParseCommands(command, client);
+                    for (; ; )
+                    {
+                        if (!stream.CanRead) break;
+
+                        string command = await reader.ReadLineAsync() ?? "";
+                        if (string.IsNullOrWhiteSpace(command))
+                        {
+                            await Logger.LogAsync($"Client {client.Client.RemoteEndPoint} disconnected.");
+                            break;
+                        }
+
+                        await ParseCommands(command, client);
+                    }
+
                 }
                 catch (Exception ex)
                 {
