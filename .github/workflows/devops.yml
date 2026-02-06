@@ -36,7 +36,8 @@ jobs:
 
                         # 4 Restart the service
                         # ./opt/mailz-net/Mailz/bin/Debug/net10.0/linux-x64/Mailz
-                        sudo systemctl restart mailz.service
+                        #sudo systemctl restart mailz.service
+                        echo "Temporary: Skipping service restart for now. Please restart the service manually after deployment."
 
                         # 5 Done
                         echo "Deployment & Build completed successfully!"
