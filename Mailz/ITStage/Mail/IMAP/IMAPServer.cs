@@ -71,7 +71,7 @@ namespace ITStage.Mail.IMAP
         {
             listener = new TcpListener(System.Net.IPAddress.Any, Port);
             listener.Start();
-
+            Logger.Log($"IMAP Server started on port {Port}. Waiting for connections...");
             while (true)
             {
                 TcpClient client = await listener.AcceptTcpClientAsync();

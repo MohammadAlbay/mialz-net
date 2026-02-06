@@ -37,3 +37,6 @@ jobs:
                         # 4 Restart the service
                         # ./opt/mailz-net/Mailz/bin/Debug/net10.0/linux-x64/Mailz
                         sudo systemctl restart mailz.service
+
+                        # 5 Done
+                        echo "Deployment & Build completed successfully!"
