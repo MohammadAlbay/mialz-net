@@ -4,7 +4,7 @@ using ITStage.Log;
 
 namespace ITStage.Mail.IMAP
 {
-    public class IMAPServer : IIMapServer
+    public partial class IMAPServer : IIMapServer
     {
         const int MAX_CAPACITY = 10;
 
@@ -52,7 +52,9 @@ namespace ITStage.Mail.IMAP
                     using StreamWriter writer = new(stream) { AutoFlush = true };
                     for (; ; )
                     {
-                        if (!stream.CanRead) break;
+                        if (!stream.CanRead || !stream.CanWrite) break;
+
+                        await RespondToClient(client, stream, "* OK IMAP4rev1 Service Ready");
 
                         string command = await reader.ReadLineAsync() ?? "";
                         if (string.IsNullOrWhiteSpace(command))
@@ -69,9 +71,37 @@ namespace ITStage.Mail.IMAP
                 {
                     await Logger.LogAsync($"Error handling client {client.Client.RemoteEndPoint}: {ex.Message}");
                 }
+            }
+        }
 
 
-                // Handle client communication here
+
+        public async Task ParseCommands(string command, TcpClient? client, StreamWriter writer = null)
+        {
+            await Logger.LogAsync($"{client.Client.RemoteEndPoint}: Parsing command: {command}");
+
+            // Extract Tag, Command, and Arguments, And Might need to handle user & password for login command
+            var parts = command.Trim().Split(' ', 4, StringSplitOptions.RemoveEmptyEntries);
+            if (parts.Length < 2) return;
+
+            var tag = parts[0];
+            var cmd = parts[1].ToUpper();
+            var args = parts.Length > 2 ? parts[2] : "";
+
+            switch (cmd)
+            {
+                case "CAPABILITY":
+                    await RespondToClient(client, writer.BaseStream, "* CAPABILITY IMAP4rev1 AUTH=PLAIN LOGIN");
+                    await RespondToClient(client, writer.BaseStream, $"{tag} OK CAPABILITY completed");
+                    break;
+                case "AUTHENTICATE":
+                    await RespondToClient(client, writer.BaseStream, $"Command is '{command}'");
+                    await RespondToClient(client, writer.BaseStream, $"{tag} OK LOGIN completed");
+                    break;
+                case "HELLO":
+                case "OLHA":
+                    await RespondToClient(client, writer.BaseStream, "Hello! Welcome to the IMAP server.");
+                    break;
             }
         }
 
@@ -90,21 +120,6 @@ namespace ITStage.Mail.IMAP
                     await Logger.LogAsync($"Error responding to client {client.Client.RemoteEndPoint}: {ex.Message}");
                 }
             });
-        }
-
-        public async Task ParseCommands(string command, TcpClient? client, StreamWriter? writer = null)
-        {
-            await Logger.LogAsync($"{client.Client.RemoteEndPoint}: Parsing command: {command}");
-            switch (command.ToUpper())
-            {
-                case "CAPABILITY":
-                    await RespondToClient(client, writer.BaseStream, "IMAP4rev1 STARTTLS LOGINDISABLED");
-                    break;
-                case "Hello":
-                case "OLHA":
-                    await RespondToClient(client, writer.BaseStream, "Hello! Welcome to the IMAP server.");
-                    break;
-            }
         }
 
         public async Task Connect()

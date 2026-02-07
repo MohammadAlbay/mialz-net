@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Mailz")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+ddd65406e0de8f3ca405437e2c27ce0f9e7e36b6")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+21eeb46cd5380b9621b244f3acc53088b9b282bc")]
 [assembly: System.Reflection.AssemblyProductAttribute("Mailz")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Mailz")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
